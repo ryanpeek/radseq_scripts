@@ -21,6 +21,8 @@ Scripts live in the `scripts` folder. This is an overview and notes about each s
 
 This symlinks raw data from miller and copies it to the associated SOMM folder in SEQS. It then unzips the data for splitting.
 
+ > if files already split: use in a screen: `for z in *fastq.gz; do gunzip -k $z; done`
+
  - **Run with:** `sbatch --mem MaxMemPerNode 01_unzip.sh SOMM504`
 
 ### `02_split_RAD.sh`
