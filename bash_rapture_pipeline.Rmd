@@ -1,0 +1,40 @@
+---
+title: "bash_rapture_pipeline"
+author: "RP"
+date: "11/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Bash Rapture Pipeline
+
+This is a basic overview of the pipeline for moving from raw seq data to bam files for analysis via `angsd`. Connect via `sftp farmer` to pull original files, then use git for remaining workflow.
+
+## Scripts
+
+Scripts live in the `scripts` folder. This is an overview and notes about each script.
+
+###  `01_unzip.sh`
+
+This symlinks raw data from miller and copies it to the associated SOMM folder in SEQS. It then unzips the data for splitting.
+
+ - **Run with:** `sbatch --mem MaxMemPerNode 01_unzip.sh SOMM504`
+
+### `02_split_RAD.sh`
+
+This is based on the original UCD Genome Center sequencing, and takes a set of barcodes of interest (based on unzipped `.fq` data from step 1) and splits by plate and then by sample using the barcodes provided.
+
+This script requires the SOMM data directory, and depends on `BarcodeSplitList3Files.pl` and `BCsplitBestRadPE2.pl` perl scripts.
+
+ - **Run with:** `sbatch --mem MaxMemPerNode 02_split_RAD.sh SOMM504`
+
+### `03_split_wells.sh`
+
+This is based on new (2020 sequencing data) and splits unzipped raw `.fq` data into individual folders for each plate.
+
+This script requires a SOMM data directory and plate code, and depends on the `BarcodeSplit_RAD_PE.2019.pl` script.
+
+ - **Run with:** `sbatch -t 1200 -p high code/03_split_wells.sh SOMM504 CGCTGT`
