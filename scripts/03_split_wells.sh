@@ -13,7 +13,7 @@ set -v # verbose -- all lines
 set -x # trace of all commands after expansion before execution
 
 # You may need modifications to run it alone.
-# run with sbatch -t 1200 -p high 03_split_wells.sh SOMM504 CGCTGT 
+# run with sbatch -t 1200 -p high 03_split_wells.sh SOMM504 barcodes.txt 
 
 # assumes in SOMMXXX/fastq directory where fastq R1/R2 are
 fqdir=$1

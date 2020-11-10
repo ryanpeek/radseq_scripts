@@ -2,8 +2,8 @@
 #SBATCH --mail-user=rapeek@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J unzip
-#SBATCH -e slurms/02_unzip.err
-#SBATCH -o slurms/02_unzip.out
+#SBATCH -e slurms/01_unzip.err
+#SBATCH -o slurms/01_unzip.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=4-20:00:00
@@ -26,7 +26,7 @@ ln -s /home/millermr/UCDavis/${rawseq}/*fq.gz /home/rapeek/projects/SEQS/${rawse
 
 #  This script will unzip all raw RAD/RAPTURE data
 #       Run with
-#               sbatch --mem MaxMemPerNode 02_unzip.sh SOMM504
+#               sbatch --mem MaxMemPerNode 01_unzip.sh SOMM504
 
 # UNZIP DATA
 cd /home/rapeek/projects/SEQS

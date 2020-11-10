@@ -2,8 +2,8 @@
 #SBATCH --mail-user=rapeek@ucdavis.edu
 #SBATCH --mail-type=ALL
 #SBATCH -J splitSEQ
-#SBATCH -e slurms/03_split_RAD.%j.err
-#SBATCH -o slurms/03_split_RAD.%j.out
+#SBATCH -e slurms/02_split_RAD.%j.err
+#SBATCH -o slurms/02_split_RAD.%j.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=2-20:00:00
@@ -14,7 +14,7 @@ set -x # trace of all commands after expansion before execution
 
 ddir=$1
 # run script with
-#	sbatch --mem MaxMemPerNode 03_split_RAD.sh
+#	sbatch --mem MaxMemPerNode 02_split_RAD.sh
 
 	#################
 	###  Set Up   ###
