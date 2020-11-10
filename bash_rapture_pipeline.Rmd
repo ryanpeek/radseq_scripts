@@ -64,6 +64,6 @@ This script requires `bwa` and `samtools`, and can be run from wherever as long 
 4. then paste together: `paste list_* > align_list`
 
 **run altogether**
- - `ls *RA* | sed "s/\.fastq//g" > list_A; ls *RB* | sed "s/\.fastq//g" > list_B; ls *RA* | sed "s/\_RA//g" > list_noAB; paste list_* > align_list`
+ - `ls *RA* > list_A; ls *RB* > list_B; ls *RA* | sed "s/\_RA//g" > list_noAB; paste list_* > align_list`
 
  - **Run with:** `sbatch --mem MaxMemPerNode 04_align.sh 3_col.bamlist reference_alignment.fa`
