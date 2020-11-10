@@ -9,16 +9,14 @@
 set -e
 set -x
 
-#  This script will align all raw fasta files
+#  This script will align all raw fasta files: needs a 3 column list of A, B, out.
 #  	sbatch --mem MaxMemPerNode 05a_align.sh 3_col.bamlist reference_alignment.fa
 
 ## assume running script while located IN dir with fqs, make a bamlist
-#ls *RA* > list_A; 
-#ls *RB* > list_B; 
-#ls *RA* | sed "s/\_RA//g" > list_noAB; 
-#paste list_* > align_list
+list=$(ls *RA* > list_A; ls *RB* > list_B; ls *RA* | sed "s/\_RA//g" | sed "s/\.fastq//g" > list_noAB; 
+paste list_*)
 
-list=$1 # give your bamlist of 3 cols RA RB output name 
+#list=$1 # give your bamlist of 3 cols RA RB output name 
 ref=$2 # give reference alignment
 #ref=/home/rapeek/projects/SEQS/final_contigs_300.fa
 
