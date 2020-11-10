@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is a basic overview of the pipeline for moving from raw seq data to bam files for analysis via `angsd`. Connect via `sftp farmer` to pull original files, then use git for remaining workflow.
 
+See `/group/millermrgrp2/ryan/SEQS` for 2020 sequencing.
+
 ## Scripts
 
 Scripts live in the `scripts` folder. This is an overview and notes about each script.
