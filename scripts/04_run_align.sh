@@ -17,8 +17,8 @@ set -x
 #ls *RA* > list_A; ls *RB* > list_B; ls *RA* | sed "s/\_RA//g" | sed "s/\.fastq//g" > list_noAB; paste list_* > align_list
 
 list=$1 # give your bamlist of 3 cols RA RB output name 
-ref=$2 # give reference alignment
-#ref=/home/rapeek/projects/SEQS/final_contigs_300.fa
+#ref=$2 # give reference alignment
+ref="/home/rapeek/projects/SEQS/final_contigs_300.fa"
 
 wc=$(wc -l ${list} | awk '{print $1}')
 
