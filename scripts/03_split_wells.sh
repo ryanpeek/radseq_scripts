@@ -2,8 +2,8 @@
 ##SBATCH --mail-user=rapeek@ucdavis.edu
 ##SBATCH --mail-type=ALL
 #SBATCH -J split
-#SBATCH -e 03_split_wells.%j.err
-#SBATCH -o 03_split_wells.%j.out
+#SBATCH -e slurms/03_split_wells.%j.err
+#SBATCH -o slurms/03_split_wells.%j.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=1-20:00:00
@@ -11,6 +11,8 @@
 #set -e # exits upon failing command
 set -v # verbose -- all lines
 set -x # trace of all commands after expansion before execution
+
+mkdir -p slurms
 
 # You may need modifications to run it alone.
 # run with sbatch -t 1200 -p high 03_split_wells.sh SOMM504 barcodes.txt 
