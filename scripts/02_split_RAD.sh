@@ -12,6 +12,8 @@ set -e # exits upon failing command
 set -v # verbose -- all lines
 set -x # trace of all commands after expansion before execution
 
+mkdir -p slurms
+
 ddir=$1
 # run script with
 #	sbatch --mem MaxMemPerNode 02_split_RAD.sh
