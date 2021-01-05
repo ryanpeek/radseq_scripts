@@ -21,7 +21,7 @@ mkdir -p slurms
 fqdir=$1
 
 # list of barcodes of interest
-bc1=$2 # ATGGCT, ACACCT, ATGGCT
+barcode=$2 # ATGGCT, ACACCT, ATGGCT
 
 # now a while loop to read each line of bc1
 while IFS= read -r barcode
@@ -42,5 +42,5 @@ do
 .
 	echo "done!"
 	cd ..
-done < ${bc1}
+done < ${barcode}
 
