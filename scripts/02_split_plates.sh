@@ -18,11 +18,24 @@ seq1=$1
 seq2=$2
 somm=$3
 
+# based on 96TruSeqBarcodes.txt
+grep --no-group-separator -A 3 ":CCGTTT" ${seq1} > ${somm}_CCGTTT_R1.fastq
+grep --no-group-separator -A 3 ":CCGTTT" ${seq2} > ${somm}_CCGTTT_R2.fastq
+
+grep --no-group-separator -A 3 ":AACGTT" ${seq1} > ${somm}_AACGTT_R1.fastq
+grep --no-group-separator -A 3 ":AACGTT" ${seq2} > ${somm}_AACGTT_R2.fastq
+
 grep --no-group-separator -A 3 ":TCAGTT" ${seq1} > ${somm}_TCAGTT_R1.fastq
 grep --no-group-separator -A 3 ":TCAGTT" ${seq2} > ${somm}_TCAGTT_R2.fastq
 
 grep --no-group-separator -A 3 ":CGTCTT" ${seq1} > ${somm}_CGTCTT_R1.fastq
 grep --no-group-separator -A 3 ":CGTCTT" ${seq2} > ${somm}_CGTCTT_R2.fastq
+
+grep --no-group-separator -A 3 ":TAGCTT" ${seq1} > ${somm}_TAGCTT_R1.fastq
+grep --no-group-separator -A 3 ":TAGCTT" ${seq2} > ${somm}_TAGCTT_R2.fastq
+
+grep --no-group-separator -A 3 ":GATATT" ${seq1} > ${somm}_GATATT_R1.fastq
+grep --no-group-separator -A 3 ":GATATT" ${seq2} > ${somm}_GATATT_R2.fastq
 
 grep --no-group-separator -A 3 ":CTCATT" ${seq1} > ${somm}_CTCATT_R1.fastq
 grep --no-group-separator -A 3 ":CTCATT" ${seq2} > ${somm}_CTCATT_R2.fastq

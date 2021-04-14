@@ -18,7 +18,7 @@ mkdir -p /home/rapeek/projects/SEQS/${rawseq}/raw
 mkdir -p /home/rapeek/projects/SEQS/${rawseq}/fastq
 
 # SYMLINK RAW DATA
-ln -s /home/millermr/UCDavis/${rawseq}/*fq.gz /home/rapeek/projects/SEQS/${rawseq}/raw/
+# ln -s /home/millermr/UCDavis/${rawseq}/*fq.gz /home/rapeek/projects/SEQS/${rawseq}/raw/
 
 # if already split use this line
 #cd /home/rapeek/projects/SEQS/${rawseq}/fastq/
