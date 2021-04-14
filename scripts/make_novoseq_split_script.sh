@@ -8,8 +8,8 @@
 #SBATCH -c 20
 
 
-# use barcode txt file here (each line is barcode)
-list=$1 #96TruSeq_Barcodes.txt
+# use barcode txt file here (each line is barcode only)
+list=$1 #96TruSeq_Barcodes_only.txt
 out=$2
 
 wc=$(wc -l ${list} | awk '{print $1}')
@@ -39,8 +39,8 @@ while [ $x -le $wc ]
 	       str=$($string)
 	       
 	       echo "
-	       grep --no-group-separator -A 3 \":${str}\" \${seq1} > \${somm}_${str}_R1.fastq
-	       grep --no-group-separator -A 3 \":${str}\" \${seq2} > \${somm}_${str}_R2.fastq" >> ${out}
+	       grep --no-group-separator -A 3 \":${str}\" \${seq1} > ../fastq/\${somm}_${str}_R1.fastq
+	       grep --no-group-separator -A 3 \":${str}\" \${seq2} > ../fastq/\${somm}_${str}_R2.fastq" >> ${out}
 	       
 	       x=$(( $x + 1 ))
 	       
