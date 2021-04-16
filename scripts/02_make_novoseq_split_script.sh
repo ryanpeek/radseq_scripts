@@ -24,7 +24,7 @@ echo "#!/bin/bash -l
 #SBATCH -o splitNovo.%j.out
 #SBATCH -c 20
 #SBATCH -p high
-#SBATCH --time=1-20:00:00
+#SBATCH --time=2-20:00:00
 
 #set -e # exits upon failing command
 #set -v # verbose -- all lines
