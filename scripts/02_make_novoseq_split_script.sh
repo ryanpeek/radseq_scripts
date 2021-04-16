@@ -17,6 +17,8 @@ wc=$(wc -l ${list} | awk '{print $1}')
 # set up script header
 echo "#!/bin/bash -l
         
+#SBATCH --mail-user=rapeek@ucdavis.edu
+#SBATCH --mail-type=ALL
 #SBATCH -J splitNovo
 #SBATCH -e splitNovo.%j.err
 #SBATCH -o splitNovo.%j.out
