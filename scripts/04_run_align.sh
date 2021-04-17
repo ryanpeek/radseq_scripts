@@ -59,7 +59,7 @@ bwa mem $ref ${c1} ${c2} | samtools view -Sb - | samtools sort - -o ${c3}.sort.b
 samtools view -f 0x2 -b ${c3}.sort.bam | samtools rmdup - ${c3}.sort.flt.bam" > ${c3}.sh
 
 	sbatch --mem=8G -t 8:00:00 ${c3}.sh
-
+  sleep 2
 	x=$(( $x + 1 ))
 
 done

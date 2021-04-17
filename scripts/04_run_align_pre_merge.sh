@@ -68,12 +68,18 @@ do
   #SBATCH -p high
 
 bwa mem $ref ${c1} ${c2} | samtools view -Sb - | samtools sort - -o ${c3}.sort.bam
-samtools view -f 0x2 -b ${c3}.sort.bam"  > ${c3}.sh
 
-# only for after merged
-#| samtools rmdup - ${c3}.sort.flt.bam"
+# add ms and MC tags for markdup, requires sorted file
+# samtools fixmate -m ${c3}.sort.bam ${c3}.sortfix.bam
 
-	sbatch --mem=8G -t 8:00:00 ${c3}.sh
+# now look at prop pairs
+samtools view -f 0x2 -b ${c3}.sort.bam > ${c3}.sortpp.bam"  > ${c3}.sh
+
+# only for after merged: https://www.htslib.org/doc/samtools-markdup.html
+#| samtools markdup -r - ${c3}.sort.flt.bam"
+
+	sbatch --mem=8G -t 24:00:00 ${c3}.sh
+	sleep 2
 
 	x=$(( $x + 1 ))
 
