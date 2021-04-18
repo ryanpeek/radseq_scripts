@@ -1,6 +1,11 @@
 #!/bin/bash -l
 
-list=$1
+#SBATCH -J index
+#SBATCH -o slurms/index_%j.out
+#SBATCH -p high
+#SBATCH -t 720
+
+list=$1 # bamlist 
 
 wc=$(wc -l ${list} | awk '{print $1}')
 
@@ -16,8 +21,13 @@ do
 	c2=$2
 
 	echo "#!/bin/bash -l
+
+	#SBATCH -J indexF
+	#SBATCH -o slurms/index_F%j.out
+
 	samtools index $c1" > ${c1}.sh 
-	sbatch -t 24:00:00 ${c1}.sh
+
+	sbatch -t 12:00:00 -p high ${c1}.sh
 
 	x=$(( $x + 1 ))
 
