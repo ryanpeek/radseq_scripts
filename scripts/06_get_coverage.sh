@@ -23,12 +23,12 @@ do
 	
 	echo "#!/bin/bash -l
 	
-	#SBATCH -o slurms/coverageOut-%j.out
-	#SBATCH -e slurms/coverageOut-%j.err
-	#SBATCH -c 2
-	#SBATCH -J cover
-  
-  mkdir -p slurms
+#SBATCH -o slurms/coverageOut-%j.out
+#SBATCH -e slurms/coverageOut-%j.err
+#SBATCH -c 2
+#SBATCH -J cover
+
+mkdir -p slurms
 	
   samtools depth -a ${bamdir}/${str} | awk '{c++; if(\$3>0) total+=1}END{print (total/c)*100}' >> ${outfile}.txt" > ${str}_depth.sh
 	

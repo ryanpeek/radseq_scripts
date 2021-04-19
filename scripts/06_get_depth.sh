@@ -23,10 +23,10 @@ do
 	
 	echo "#!/bin/bash -l
 	
-	#SBATCH -o slurms/depthOut-%j.out
-	#SBATCH -e slurms/depthOut-%j.err
-	#SBATCH -c 2
-  #SBATCH -J depthOut
+#SBATCH -o slurms/depthOut-%j.out
+#SBATCH -e slurms/depthOut-%j.err
+#SBATCH -c 2
+#SBATCH -J depthOut
   
   mkdir -p slurms
 	
