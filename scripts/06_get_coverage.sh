@@ -30,7 +30,7 @@ do
   
   mkdir -p slurms
 	
-  samtools depth -a ${bamdir}/${str} | awk '{c++; if($3>0) total+=1}END{print (total/c)*100}' >> ${outfile}.txt" > ${str}_depth.sh
+  samtools depth -a ${bamdir}/${str} | awk '{c++; if(\$3>0) total+=1}END{print (total/c)*100}' >> ${outfile}.txt" > ${str}_depth.sh
 	
 	sbatch -t 500 -p high ${str}_depth.sh
 	
