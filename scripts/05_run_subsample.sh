@@ -19,6 +19,7 @@ set -x # trace of all commands after expansion before execution
 
 list=$1 # list of bams
 num=$2 # the number of reads to threshold
+threshold=$3 # the label to append to files w threshold (i.e., 01m or 30k
 
 wc=$(wc -l ${list} | awk '{print $1}')
 
@@ -33,12 +34,12 @@ do
 	c1=$1
 	c2=$2
 
-	count=$(samtools view -c ${c1})
+	count=$(samtools view -c bams/${c1})
 
         if [ $num -le $count ]
         then
                 frac=$(bc -l <<< $num/$count)
-                samtools view -bs $frac ${c1} > ${c1}_${num}.bam
+                samtools view -bs $frac bams/${c1} > bams/${c1}_${threshold}.bam
         fi
 
 	x=$(( $x + 1 ))
