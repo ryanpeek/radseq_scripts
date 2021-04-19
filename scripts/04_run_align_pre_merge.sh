@@ -67,6 +67,7 @@ do
 	#SBATCH -J mergebams
   #SBATCH -p high
 
+
 bwa mem $ref ${c1} ${c2} | samtools view -Sb - | samtools sort - -o ${c3}.sort.bam
 
 # add ms and MC tags for markdup, requires sorted file

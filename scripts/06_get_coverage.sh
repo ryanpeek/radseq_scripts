@@ -1,8 +1,8 @@
 #!/bin/bash -l
 
-#SBATCH -J depth
-#SBATCH -e slurms/depth.%j.err
-#SBATCH -o slurms/depth.%j.out
+#SBATCH -J coverage
+#SBATCH -e slurms/cover.%j.err
+#SBATCH -o slurms/cover.%j.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=2-20:00:00
@@ -23,16 +23,16 @@ do
 	
 	echo "#!/bin/bash -l
 	
-	#SBATCH -o slurms/depthOut-%j.out
-	#SBATCH -e slurms/depthOut-%j.err
+	#SBATCH -o slurms/coverageOut-%j.out
+	#SBATCH -e slurms/coverageOut-%j.err
   #SBATCH -c 20
   #SBATCH -t 500
   #SBATCH -p high
-	#SBATCH -J depthout
+	#SBATCH -J cover
   
   mkdir -p slurms
 	
-  samtools depth -a ${bamdir}/${str} | awk '{c++;s+=$3}END{print s/c}' >> ${outfile}.txt" > ${str}_depth.sh
+  samtools depth -a ${bamdir}/${str} | awk '{c++; if($3>0) total+=1}END{print (total/c)*100}' >> ${outfile}.txt" > ${str}_depth.sh
 	
 	sbatch ${str}_depth.sh
 	
