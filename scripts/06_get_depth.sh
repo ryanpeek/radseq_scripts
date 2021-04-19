@@ -25,16 +25,14 @@ do
 	
 	#SBATCH -o slurms/depthOut-%j.out
 	#SBATCH -e slurms/depthOut-%j.err
-  #SBATCH -c 20
-  #SBATCH -t 500
-  #SBATCH -p high
-	#SBATCH -J depthout
+	#SBATCH -c 2
+  #SBATCH -J depthOut
   
   mkdir -p slurms
 	
   samtools depth -a ${bamdir}/${str} | awk '{c++;s+=$3}END{print s/c}' >> ${outfile}.txt" > ${str}_depth.sh
 	
-	sbatch ${str}_depth.sh
+	sbatch -t 500 -p high ${str}_depth.sh
 	
 	x=$(( $x + 1 ))
 

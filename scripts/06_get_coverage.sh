@@ -25,16 +25,14 @@ do
 	
 	#SBATCH -o slurms/coverageOut-%j.out
 	#SBATCH -e slurms/coverageOut-%j.err
-  #SBATCH -c 20
-  #SBATCH -t 500
-  #SBATCH -p high
+	#SBATCH -c 2
 	#SBATCH -J cover
   
   mkdir -p slurms
 	
   samtools depth -a ${bamdir}/${str} | awk '{c++; if($3>0) total+=1}END{print (total/c)*100}' >> ${outfile}.txt" > ${str}_depth.sh
 	
-	sbatch ${str}_depth.sh
+	sbatch -t 500 -p high ${str}_depth.sh
 	
 	x=$(( $x + 1 ))
 
