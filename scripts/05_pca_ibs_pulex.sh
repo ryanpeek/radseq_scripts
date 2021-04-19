@@ -5,7 +5,8 @@
 #SBATCH -J pca_ibs
 #SBATCH -e slurms/05_pca_ibs.%j.err
 #SBATCH -o slurms/05_pca_ibs.%j.out
-#SBATCH -c 20
+#SBATCH -c 4
+#SBATCH --mem=60G
 #SBATCH -p high
 #SBATCH --time=2-20:00:00
 

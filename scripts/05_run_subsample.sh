@@ -2,22 +2,23 @@
 
 #SBATCH --mail-user=rapeek@ucdavis.edu
 #SBATCH --mail-type=ALL
-#SBATCH -J splitSEQ
-#SBATCH -e slurms/05b_subsample.%j.err
-#SBATCH -o slurms/05b_subsample.%j.out
+#SBATCH -J subsamp
+#SBATCH -e slurms/subsample.%j.err
+#SBATCH -o slurms/subsample.%j.out
 #SBATCH -c 20
 #SBATCH -p high
 #SBATCH --time=2-20:00:00
 
-set -e # exits upon failing command
+#set -e # exits upon failing command
 set -v # verbose -- all lines
-set -x # trace of all commands after expansion before execution#SBATCH -J subsample
-
-# run with "sbatch 05b_run_subsample.sh bamlist 30k
+set -x # trace of all commands after expansion before execution
 
 
-list=$1
-num=$2
+# run with "sbatch 05b_run_subsample.sh bamlist 30000
+
+
+list=$1 # list of bams
+num=$2 # the number of reads to threshold
 
 wc=$(wc -l ${list} | awk '{print $1}')
 

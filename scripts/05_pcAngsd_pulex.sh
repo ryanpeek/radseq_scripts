@@ -5,9 +5,10 @@
 #SBATCH -J pcAngsd
 #SBATCH -e slurms/02_pcAngsd.%j.err
 #SBATCH -o slurms/02_pcAngsd.%j.out
-#SBATCH -c 20
+#SBATCH -c 1
+#SBATCH --mem=60G
 #SBATCH -p high
-#SBATCH --time=1-20:00:00
+#SBATCH -t 2880
 
 set -e # exits upon failing command
 set -v # verbose -- all lines
