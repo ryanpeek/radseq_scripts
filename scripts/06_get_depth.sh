@@ -28,9 +28,9 @@ do
 #SBATCH -c 2
 #SBATCH -J depthOut
   
-  mkdir -p slurms
+mkdir -p slurms
 	
-  samtools depth -a ${bamdir}/${str} | awk '{c++;s+=\$3}END{print s/c}' >> ${outfile}.txt" > ${str}_depth.sh
+samtools depth -a ${bamdir}/${str} | awk -v b=${str} '{c++;s+=\$3}END {print b, "\t", s/c}' >> ${outfile}.txt" > ${str}_depth.sh
 	
 	sbatch -t 500 -p high ${str}_depth.sh
 	

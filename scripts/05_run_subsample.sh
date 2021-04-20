@@ -13,8 +13,7 @@
 set -v # verbose -- all lines
 set -x # trace of all commands after expansion before execution
 
-
-# run with "sbatch 05b_run_subsample.sh bamlist 30000
+# run with: sbatch 05_run_subsample.sh bamlist 30000 30k 
 
 
 list=$1 # list of bams
