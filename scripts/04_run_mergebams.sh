@@ -7,7 +7,7 @@
 #SBATCH --time=4-20:00:00
 
 # this merges mult seq runs (mult bamfiles) into single bams
-# assumes remove dups has NOT been run yet (i.e., not using "flt.bams")
+# assumes all files live in SEQS/SOMMXXX/bams
 
 mkdir -p slurms
 
@@ -19,7 +19,7 @@ somm2=$2
 
 # create list automatically, assumes you are in BAM dir
 # cd bams
-ls ${somm1}*sort.bam > list_A; ls *${somm2}*sort.bam > list_B; ls ${somm1}*sort.bam | sed "s/\.sort\.bam//g" | sed "s/${somm1}/SOMM/g" > list_noAB; paste list_* > align_list
+ls SEQS/${somm1}/bams/${somm1}*sort.bam > list_A; ls SEQS/${somm2}/bams/${somm2}*sort.bam > list_B; ls SEQS/${somm1}/bams/${somm1}*sort.bam | sed "s/\.sort\.bam//g" | sed "s/SEQS\/${somm1}\/bams\/${somm1}/SOMM/g" > list_noAB; paste list_* > align_list
 
 rm list* # remove temp lists
 
@@ -39,24 +39,25 @@ do
 
 	var=$(echo $str | awk -F"\t" '{print $1, $2, $3}')   
 	set -- $var
-	c1=$1 # bam outname
-	c2=$2 # 1st bamset
-	c3=$3 # 2nd bamset, # add as needed
+	c1=$1 # 1st bamset
+	c2=$2 # 2nd bamset
+	c3=$3 # outname
 
 	echo "#!/bin/bash -l
 	
-	#SBATCH --mail-user=rapeek@ucdavis.edu
-  #SBATCH --mail-type=ALL
-	#SBATCH -o slurms/mergebams-%j.out
-	#SBATCH -e slurms/mergebams-%j.err
-  #SBATCH -c 20
-	#SBATCH -J mergebams
+#SBATCH --mail-user=rapeek@ucdavis.edu
+#SBATCH --mail-type=ALL
+#SBATCH -o slurms/mergebams-%j.out
+#SBATCH -e slurms/mergebams-%j.err
+#SBATCH -c 20
+#SBATCH -J mergebams
   
-  mkdir -p slurms
+mkdir -p slurms
+mkdir -p SEQS/MERGED
   
-  # check paths are included in list file
+	# check paths are included in list file
 	# change depending on columns of sequences to merge
-        samtools merge ${c1}.merge.bam ${c2} ${c3}
+        samtools merge SEQS/MERGED/${c1}.merge.bam ${c2} ${c3}
         samtools rmdup ${c1}.merge.bam ${c1}.merge.flt.bam" > ${c1}.sh
 	
 	sbatch -t 720 -p med --mem=2G ${c1}.sh

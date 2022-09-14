@@ -20,7 +20,7 @@ mkdir -p slurms
 ##  Run with: sbatch 04_run_align_pre_merge.sh $SOMM 
 
 # INPUTS
-somm=$1 # the full path to the fastq files 
+somm=$1 # the path to the fastq dir (~/SEQS/SOMM513/fastq)
 
 # switch to dir
 echo "changing dir"
@@ -42,7 +42,6 @@ list="align_list"
 # set reference alignment
 ref="/home/rapeek/projects/refgenomes/dpulex/GCA_900092285.2_PA42_4.1_genomic.fna"
 #ref="/home/rapeek/projects/SEQS/final_contigs_300.fa"
-#ref=$2 # or give reference alignment
 
 # loop through
 wc=$(wc -l ${list} | awk '{print $1}')
@@ -61,23 +60,17 @@ do
 
 	echo "#!/bin/bash -l
 	
-	#SBATCH -o slurms/bwa_align-%j.out
-	#SBATCH -e slurms/bwa_align-%j.err
-  #SBATCH -c 20
-	#SBATCH -J mergebams
-  #SBATCH -p high
+#SBATCH -o slurms/bwa_align-%j.out
+#SBATCH -e slurms/bwa_align-%j.err
+#SBATCH -c 20
+#SBATCH -J bwa
+#SBATCH -p high
 
 
-bwa mem $ref ${c1} ${c2} | samtools view -Sb - | samtools sort - -o ${c3}.sort.bam
+bwa mem $ref ${c1} ${c2} | samtools view -Sb - | samtools sort - -o ${c3}.sort.bam" > ${c3}.sh
 
-# add ms and MC tags for markdup, requires sorted file
 # samtools fixmate -m ${c3}.sort.bam ${c3}.sortfix.bam
-
-# now look at prop pairs
-samtools view -f 0x2 -b ${c3}.sort.bam > ${c3}.sortpp.bam"  > ${c3}.sh
-
-# only for after merged: https://www.htslib.org/doc/samtools-markdup.html
-#| samtools markdup -r - ${c3}.sort.flt.bam"
+#samtools view -f 0x2 -b ${c3}.sort.bam > ${c3}.sortpp.bam"  > ${c3}.sh
 
 	sbatch --mem=8G -t 24:00:00 ${c3}.sh
 	sleep 2
